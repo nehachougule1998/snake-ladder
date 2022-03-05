@@ -4,11 +4,20 @@ public class Snake_ladder {
 
 	     static int startgame = 0;
 	     static  int dice = 0;
-		 static Random rand = new Random();
+	     static Random rand = new Random();
 	     static int getRandomvalue() {
-		 Random ch = new Random();
-		 
-		 int randomvalue = ch.nextInt(6) +1;
+	    	 
+	     System.out.println("Single player at start position "+ startgame);
+	     while (startgame <= 100){
+	     dice = rollDice();
+	     startgame = getRandomoption(dice, startgame);
+	     }
+	     System.out.println("Win the game position is : "+ startgame);
+	    return dice;
+	     }
+	     public static int rollDice(){
+	     Random ch = new Random();
+	     int randomvalue = ch.nextInt(6) +1;
 		 System.out.println("player roll the die");
 		 randomvalue = randomvalue + 1;
 		 System.out.println("dice ; " +randomvalue);
@@ -18,7 +27,7 @@ public class Snake_ladder {
 	    int randomoption =rand.nextInt(3);
 	    randomoption = randomoption + 1;
 	    System.out.println("checkoption: " +randomoption);
-	    
+	   
 	    
 	    switch (randomoption){
         case 0:
@@ -39,9 +48,10 @@ public class Snake_ladder {
          	 System.out.println("welcome to snake and ladder game");
          	 
          	 dice = getRandomvalue();
-         	 getRandomoption( dice , startgame);
-        
+         	startgame = getRandomoption( dice , startgame);
+             
 	      }
-		
-   	}
+		   
+   	        
+    }
 
