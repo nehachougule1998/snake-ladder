@@ -1,6 +1,7 @@
 package com.bridgelabz;
 import java.util.Random;
 public class Snake_ladder {
+
 	     static int startgame = 0;
 	     static  int dice = 0;
 		 static Random rand = new Random();
@@ -44,5 +45,3 @@ public class Snake_ladder {
 		
    	}
 
-
-   
