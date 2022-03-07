@@ -43,7 +43,7 @@ public class Snake_ladder {
 			int countPosition = 0;
 
 			System.out.println("Welcome to Snake And Ladder Game \n");
-			System.out.println("Singal Player at start position " +startgame);
+			System.out.println("Single Player at start position " +startgame);
 			while (startgame <= 100)	{
 				dice = getRandomValue();
 				countDice ++;
