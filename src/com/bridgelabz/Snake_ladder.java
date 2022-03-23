@@ -1,69 +1,109 @@
 package com.bridgelabz;
 import java.util.Random;
 public class Snake_ladder {
+int currentPosition = 0;
+    
+    Random rand = new Random();
+    
+    int attempts = 0;
+    
+    final int noPlay = 0, ladder = 1, snake = 2;
+    
+    int endGame = 0;
 
-	static Random random = new Random();
-	static int getRandomValue(){
-			int randomValue = random.nextInt(6);
-			System.out.println("Player Roll the die");
-			randomValue = randomValue + 1;
-			System.out.println("dice : " +randomValue);
-			return randomValue;
-	}
-	
-	static int getRandomOption(int startgame, int dice) {
-			int randomOption = random.nextInt(3);
-			randomOption = randomOption + 1;
-			System.out.println("Choose option : " +randomOption);
-			
-			switch(randomOption) {
-			case 0 :
-				   System.out.println("no play then player stay same position");
-				   break;
-			case 1 :
-				   startgame = startgame + dice;
-				   System.out.println("Ladder the Player moves ahead :" + startgame);
-				   break;
-			case 2 :
-					if(startgame >= 0)
-						startgame = startgame - dice;
-						System.out.println("Snake the player moves behind : " + startgame);
-						break;
-			default :
-			}
-			System.out.println();
-			return startgame;
-	}
-	
-		public static void main(String[] args) {
-		
-			int startgame = 0;
-			int dice ;
-			int countDice = 0;
-			int countPosition = 0;
+    public void  gameStart(String playerName) {
+    	
+        int rollDie = rand.nextInt(6) + 1;
+        
+        System.out.println("rollDie is :" + rollDie);
+        
+        int gameCheck = rand.nextInt(3);
+        
+        System.out.println("game Check is " + gameCheck);
 
-			System.out.println("Welcome to Snake And Ladder Game \n");
-			System.out.println("Singal Player at start position " +startgame);
-			while (startgame <= 100)	{
-				dice = getRandomValue();
-				countDice ++;
-				int t = startgame;
-				startgame=getRandomOption(startgame , dice);
-				if(startgame > t)
-					countPosition ++;
-			}
-			if (startgame > 100) {
-				int temp = startgame - 100;
-				startgame = startgame - temp;
-				System.out.println("win the game position is : "+startgame);
-				System.out.println("Number of count dice : "+countDice);
-				System.out.println("number of count position : "+countPosition);
-			}
-			else {	
-				System.out.println("Win the game postion : " +startgame);
-				System.out.println("number of count dice : "+countDice);
-				System.out.println("number of count position : "+countPosition);
-			}	
-      }
-      
+        if (gameCheck == noPlay) {
+        	
+            currentPosition = currentPosition;
+            
+            System.out.println("This is no play.");
+            
+            System.out.println(playerName+ "'s current position is : " + currentPosition);
+            
+            attempts ++;
+            
+            endGame = currentPosition;
+
+        }
+        
+        else if (gameCheck == ladder) {
+        	
+            currentPosition = currentPosition + rollDie;
+            
+            System.out.println("You got promoted by " + rollDie);
+            
+            System.out.println(playerName+ "'s current position is : " + currentPosition);
+            
+            attempts ++;
+            
+            endGame = currentPosition;
+        }
+        
+        else {
+        	
+            if (currentPosition < rollDie) {
+            	
+                currentPosition = 0;
+                
+                System.out.println("You got snake of " + rollDie + " star again from zero.");
+                
+                System.out.println(playerName+ "'s current position is : " + currentPosition);
+            }
+            
+            else {
+            	
+                currentPosition = currentPosition - rollDie;
+                
+                System.out.println("you got snake of " + rollDie);
+                
+                System.out.println(playerName+ "'s current position is : " + currentPosition);
+            }
+            
+            attempts ++;
+            
+            endGame = currentPosition;
+        }
+
+    }
+
+    public static void main(String[] args) {
+    	
+        System.out.println("Welcome to Snake & ladder game.");
+        
+        gamePlayer play1 = new gamePlayer();
+        
+        bridgelabz.program.gamePlayer play2 = new gamePlayer();
+        
+        while (play1.endGame <= 100 && play2.endGame <= 100) {
+        	
+            play1.gameStart("Player1");
+            
+            play2.gameStart("Player2");
+            
+        }
+        
+        if (play1.endGame < play2.endGame) {
+        	
+            System.out.println("Congratulation player 2 you have won the game.");
+            
+        } else if (play1.endGame > play2.endGame) {
+        	
+            System.out.println("Congratulation player 1 you have won the game.");
+            
+        } else {
+        	
+            System.out.println("match draw");
+
+        }
+    }
 }
+
